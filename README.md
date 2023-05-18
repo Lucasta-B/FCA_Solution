@@ -58,7 +58,7 @@ And an ‘Action: Backup’ record with a status of “SUCCESS” is stored in t
 >**Scenario: Required Folder does not Exist**  
 Given the specified folder does not exist  
 When backup for the specified folder command is invoked  
-Then an error status is returned with an “No such directory” error message
+Then an error status is returned with an “No such directory” error message  
 And an ‘Action: Backup’ record with a status of “FAILED” is stored in the DB  
 
 ### FEATURE: DISPLAY LOGS
