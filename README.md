@@ -1,18 +1,24 @@
 # FCA - DevOps Program
 
+<!-- TOC -->
+* [FCA - DevOps Program](#fca---devops-program)
+  * [Introduction](#introduction)
+  * [Case Study - Remote Backup Automation](#case-study---remote-backup-automation)
+    * [FEATURE: RUN BACKUP](#feature-run-backup)
+    * [FEATURE: DISPLAY LOGS](#feature-display-logs)
+    * [FEATURE: DISPLAY STATISTICS](#feature-display-statistics)
+  * [Minimal Viable Product](#minimal-viable-product)
+<!-- TOC -->
 
 **Reference Implementations (Model Answers)**
-
-- [Project 1 - Python, Flask, MYSQL](project1-python-flask/README.md)
-- [Project 2 - jenkins-docker](project2-jenkins-docker/README.md)
-- [Project 3 - SpringBoot MicroService](project3-springboot/README.md)
-- [Project 4 - Jenkins CI/CD](project4-cicd-pipeline/README.md)
-- [Project 5 - AWS Design and Deploy](project5-aws-design-deploy/README.md)
+- [Project 1 - Python/MYSQL/Flask](project1-python-flask/README.md)
+- [Project 2 - Database Schema Design](project2-jenkins-docker/README.md)
+- [Project 3 - SpringBoot MicroService](project3-aws/README.md)
 
 ---
 
 ## Introduction
-The program revolves around a case study of developing Automation that will be deployed to AWS.  The program consists of three dedicated project lab stages that mimic a DevOps life cycle from Application Development, CI/CD and Deploying to the Cloud.
+The program revolves around a case study of developing application for automating files backups that will be deployed to AWS.  The program consists of three dedicated project lab stages that mimic a DevOps life cycle from Application Development, CI/CD and Deploying to the Cloud.
 
 ![](./docs/images/project-plan.png)
 <figcaption><b>Fig.1 - Project Plan</b></figcaption>
@@ -31,11 +37,15 @@ This consist of building and dockerising the Python application from project 1
 **Project 3**
 Design AWS infrastructure for the deployment of Project 1 Python Application to AWS that can  access from the WEB. 
 
+The following diagram how the projects relate to each other. 
+
+![](./docs/images/projects-boundary.png)
+<figcaption><b>Fig.2 - Projects Overview</b></figcaption>
+
 ---
 
 ## Case Study - Remote Backup Automation
 The project will be based on the creation of a manual backup auditing and reporting system with the following features:
-
 
 ### FEATURE: RUN BACKUP
 >**Scenario: Required Folder Exists**  
@@ -45,48 +55,43 @@ When the backup/{folder_name} command is sent to the relevant flask http endpoin
 Then the folder is copied into the user backup folder on the remote machine  
 And an ‘Action: Backup’ record with a status of “SUCCESS” is stored in the DB  
 
->**Scenario: Required Folder does not Exist**
+>**Scenario: Required Folder does not Exist**  
 Given the specified folder does not exist  
 When backup for the specified folder command is invoked  
 Then an error status is returned with an “No such directory” error message
+And an ‘Action: Backup’ record with a status of “FAILED” is stored in the DB  
 
 ### FEATURE: DISPLAY LOGS
->**Scenario: user request logs with no criteria**   
-When {get_logs} command is invoked  
-Then message displayed to user that logs have been cleared  
-And record with clear data displayed to user  
+>**Scenario: user request logs with no criteria**  
+When {get_logs} command is invoked with no creteria
+Then all the logs is returned 
+And an ‘Action: Get Log’ record with a status of “SUCCESS” is stored in the DB  
 
-Scenario: user request most Recent Reset 
-When {most_recent_reset} command invoked
-Then top record of the table extracted and displayed
-
-Scenario: user request logs for a date range
-        Given a date range parameter is specified 
+>**Scenario: user request logs for a date range**
+Given that a valid date range has been specified 
 When {get_logs} command is invoked
 Then all the records within the date range (inclusive start and end date) is returned 
+And an ‘Action: Get Log’ record with a status of “SUCCESS” is stored in the DB  
 
-
-FEATURE: DISPLAY STATISTICS
-Scenario: User requests stats
+### FEATURE: DISPLAY STATISTICS
+>Scenario> **User requests stats**
 When {get_stats} command is invoked
 Then the total number of backups, successes and failures are returned
-
+And an ‘Action: Get State’ record with a status of “SUCCESS” is stored in the DB  
 
 ---
 
 ## Minimal Viable Product
+- **Remote backup**
+  - Able to invoke remote backup from CURL
 
-- **Manage Seller**
-    - Register a new seller
-    - Display all sellers
+- **Display Logs**
+  - ABle to display all logs
 
-- **Manage Properties**
-    - Add properties
-    - Display all properties
-    - Find and display properties with given search criteria on price, bedrooms, bathroom and garden
-    - Withdraw a property
-    - Resubmit a property
+- **CI/CD**
+  - Pipeline to build, dockerise project 1 and push Nexus Repository
 
-- **Manage Buyer**
-    - Register new buyer
-    - Display all buyers
+- **Cloud/AWS**
+  - Able to deploy project 1 as docker and  a local mysql (can be docker)
+  - Single VM on public subnet
+  - Be able to invoke remote backup over the internet
