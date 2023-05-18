@@ -6,6 +6,7 @@
   * [Introduction](#introduction)
   * [API Design](./docs/api.md)
   * [Tasks](#tasks)
+  * [Reference Solution](#reference-solution)
   * [Minimal Viable Product](#minimal-viable-product)
 <!-- TOC -->
 
