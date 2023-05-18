@@ -63,20 +63,20 @@ And an ‘Action: Backup’ record with a status of “FAILED” is stored in th
 
 ### FEATURE: DISPLAY LOGS
 >**Scenario: user request logs with no criteria**  
-When {get_logs} command is invoked with no creteria
-Then all the logs is returned 
+When {get_logs} command is invoked with no creteria  
+Then all the logs is returned  
 And an ‘Action: Get Log’ record with a status of “SUCCESS” is stored in the DB  
 
->**Scenario: user request logs for a date range**
-Given that a valid date range has been specified 
-When {get_logs} command is invoked
-Then all the records within the date range (inclusive start and end date) is returned 
+>**Scenario: user request logs for a date range**  
+Given that a valid date range has been specified  
+When {get_logs} command is invoked  
+Then all the records within the date range (inclusive start and end date) is returned  
 And an ‘Action: Get Log’ record with a status of “SUCCESS” is stored in the DB  
 
 ### FEATURE: DISPLAY STATISTICS
->Scenario> **User requests stats**
-When {get_stats} command is invoked
-Then the total number of backups, successes and failures are returned
+>**Scenario:User requests stats**  
+When {get_stats} command is invoked  
+Then the total number of backups, successes and failures are returned  
 And an ‘Action: Get State’ record with a status of “SUCCESS” is stored in the DB  
 
 ---
