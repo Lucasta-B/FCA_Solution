@@ -4,7 +4,7 @@
 <!-- TOC -->
 * [Project 1 : Python, Flask, MySQL](#project-1--python-flask-mysql)
   * [Introduction](#introduction)
-  * [API Design](#api-design)
+  * [API Design](./docs/api.md)
   * [Tasks](#tasks)
   * [Minimal Viable Product](#minimal-viable-product)
 <!-- TOC -->

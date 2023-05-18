@@ -12,8 +12,8 @@
 
 **Reference Implementations (Model Answers)**
 - [Project 1 - Python/MYSQL/Flask](project1-python-flask/README.md)
-- [Project 2 - Database Schema Design](project2-jenkins-docker/README.md)
-- [Project 3 - SpringBoot MicroService](project3-aws/README.md)
+- [Project 2 - CI/CD, DOCKER, Nexus](project2-jenkins-docker/README.md)
+- [Project 3 - Deploy to AWS](project3-aws/README.md)
 
 ---
 
