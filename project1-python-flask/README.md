@@ -30,8 +30,8 @@ See [API Design](./docs/api.md)
 The following lists the technical tasks required for Project 1.
 
 >**Technical Tasks**
-> Install docker
-> Install mysql as docker image
+> Install docker  
+> Install mysql as docker image  
 > Create SQL schema
 
 The following features is applicable to project 1 as outlined [program README](../README md/#case-study---remote-backup-automation)
@@ -50,11 +50,28 @@ Each action will be recorded in the DB.
 These two features involves reading the actions table and returning the relevant result.  There is no logic to be performed with the Linux system 
 
 ![](./docs/images/get-logs.png)  
-<figcaption><b>Fig.3 - Stats and Logs Sequence</b></figcaption>
+<figcaption><b>Fig.3 - Stats and Logs Sequence</b></figcaption>  
+  
+    
+## Reference Solution
 
+This is an example solution for the tasks
+
+Creating the project database  
+**CREATE DATABASE projectdb;** 
+
+Creating the project table   
+
+**CREATE TABLE actions(  
+ &emsp;   Record ID int PRIMARY KEY   AUTO_INCREMENT,  
+   &emsp;  Date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,   
+   &emsp;  Action VARCHAR,   
+   &emsp;  Command VARCHAR,   
+   &emsp;  Status VARCHAR  
+)**
 ## Minimal Viable Product
 - **Remote backup**
   - Able to invoke remote backup from CURL
 
 - **Display Logs**
-  - ABle to display all logs
+  - Able to display all logs
