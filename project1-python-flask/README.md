@@ -2,24 +2,33 @@
 # Project 1 : Python, Flask, MySQL
 
 <!-- TOC -->
-* [Project 1 : Python, Flask, MySQL](#project-1--python-flask-mysql)
-  * [Introduction](#introduction)
-  * [API Design](./docs/api.md)
-  * [Tasks](#tasks)
-  * [Reference Solution](#reference-solution)
-  * [Minimal Viable Product](#minimal-viable-product)
+- [Project 1 : Python, Flask, MySQL](#project-1--python-flask-mysql)
+  - [Introduction](#introduction)
+  - [API Design](#api-design)
+  - [Tasks](#tasks)
+  - [Reference Solution](#reference-solution)
+    - [Dependancies](#dependancies)
+      - [Specifying the Backup Folder location](#specifying-the-backup-folder-location)
+    - [Database](#database)
+  - [Minimal Viable Product](#minimal-viable-product)
 <!-- TOC -->
 
 ## Introduction
-Project 1 consist of building a Remote backup automation that can be invoked remotely using http.  The high level architecture is shown in figure 1 below.
+Project 1 consist of building a Remote backup automation that can be invoked remotely using http.  The high level architecture is shown in figure 1 below.  While this use case does not necessary reflect a real preactical case, it does server to demonstrate how automation can be invoked and controlled via a WEB (REST) API.
 
 ![](./docs/images/project1.png)
 <figcaption><b>Fig.1 - Project 1</b></figcaption>
 
 A single table for recording logs is describe in figure 2 below:
 
-![](./docs/images/db.png)  
-<figcaption><b>Fig.2 - DB</b></figcaption>
+
+| Field     | Type          | Null | Key | Default           |                   | Comment                                    |
+|-----------|---------------|------|-----|-------------------|-------------------|--------------------------------------------|
+| id        | int           | NO   | PRI | NULL              | auto_increment    | Primary KEY                                |
+| date      | timestamp     | NO   |     | CURRENT_TIMESTAMP | DEFAULT_GENERATED | Datetime                                   |
+| action    | varchar(100)  | YES  |     | NULL              |                   | The action performed (Backup, Stats, Logs) |
+| parameter | varchar(1000) | YES  |     | NULL              |                   |                                            |
+| status    | varchar(100)  | YES  |     | NULL              |                   | SUCCESS or ERROR                           |
 
 
 ## API Design
@@ -55,20 +64,40 @@ These two features involves reading the actions table and returning the relevant
     
 ## Reference Solution
 
-This is an example solution for the tasks
+### Dependancies
 
-Creating the project database  
-**CREATE DATABASE projectdb;** 
+The reference code has the following dependancies
 
-Creating the project table   
+```bash
+pip install python-dateutil
+pip install Flask
+pip install mysql-connector-python
+```
 
-**CREATE TABLE actions(  
- &emsp;   Record ID int PRIMARY KEY   AUTO_INCREMENT,  
-   &emsp;  Date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,   
-   &emsp;  Action VARCHAR,   
-   &emsp;  Command VARCHAR,   
-   &emsp;  Status VARCHAR  
-)**
+#### Specifying the Backup Folder location
+
+The refernce answer will use the path specified in the environment variable ```BACKUP-FOLDER``` to store all its backup.  If the BACKUP-FOLDER env varible is not defined, the code default to storing all backups in a local folder (backup).  See backup.py
+
+### Database
+
+The following show the the scripts for create the Reference Solution Database
+
+**Creating the project database**
+```sql
+CREATE DATABASE fca;
+```
+**Creating the log table**
+
+```SQL
+CREATE TABLE log(
+  id        INT PRIMARY KEY AUTO_INCREMENT,
+  date      TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  action    VARCHAR(100),
+  parameter VARCHAR(1000),
+  status    VARCHAR(100)
+);
+```
+
 ## Minimal Viable Product
 - **Remote backup**
   - Able to invoke remote backup from CURL
