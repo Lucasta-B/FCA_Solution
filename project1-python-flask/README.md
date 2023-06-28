@@ -14,7 +14,7 @@
 <!-- TOC -->
 
 ## Introduction
-Project 1 consist of building a Remote backup automation that can be invoked remotely using http.  The high level architecture is shown in figure 1 below.  While this use case does not necessary reflect a real preactical case, it does server to demonstrate how automation can be invoked and controlled via a WEB (REST) API.
+Project 1 consists of building a Remote backup automation that can be invoked remotely using http.  The high level architecture is shown in figure 1 below.  While this use case does not necessary reflect a real preactical case, it does server to demonstrate how automation can be invoked and controlled via a WEB (REST) API.
 
 ![](./docs/images/project1.png)
 <figcaption><b>Fig.1 - Project 1</b></figcaption>
@@ -64,7 +64,7 @@ These two features involves reading the actions table and returning the relevant
     
 ## Reference Solution
 
-### Dependancies
+### Dependencies
 
 The reference code has the following dependancies
 
@@ -76,11 +76,42 @@ pip install mysql-connector-python
 
 #### Specifying the Backup Folder location
 
-The refernce answer will use the path specified in the environment variable ```BACKUP-FOLDER``` to store all its backup.  If the BACKUP-FOLDER env varible is not defined, the code default to storing all backups in a local folder (backup).  See backup.py
+The reference answer will use the path specified in the environment variable ```BACKUPFOLDER``` to store all its backup.  If the BACKUP-FOLDER env varible is not defined, the code default to storing all backups in a local folder (backup).  See backup.py
+
+
+```bash
+# Linux
+export BACKUPFOLDER=[path]
+
+where [pathj] = path to the backup folder e.g. ./somefolder
+```
+
+```shell
+# Windnows Shell
+SET BACKUPFOLDER=[path]
+
+where [pathj] = path to the backup folder e.g. C:
+```
+
+### Running the code
+```bash
+python app.py
+
+# Using Curl
+
+# Backup example
+curl -X POST http://localhost:5000 -H "Content-Type: application/json" -d '{"path":"G:\hello"}' 
+
+# Get Log
+curl localhost:5000/log?start=2023-06-01&end=2023-08-31
+
+# Get Log
+curl localhost:5000/stat
+```
 
 ### Database
 
-The following show the the scripts for create the Reference Solution Database
+The following shows the scripts for create the Reference Solution Database
 
 **Creating the project database**
 ```sql

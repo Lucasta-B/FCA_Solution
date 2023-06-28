@@ -5,7 +5,7 @@ import os
 import datetime
 
 # Get the backup folder path from environment variable
-backup_folder_path = os.environ.get('BACKUP-FOLDER')
+backup_folder_path = os.environ.get('BACKUPFOLDER')
 if backup_folder_path is None or not backup_folder_path:
     backup_folder_path = './backup'
 

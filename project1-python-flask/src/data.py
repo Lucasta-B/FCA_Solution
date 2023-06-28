@@ -1,12 +1,19 @@
+import os
 import mysql.connector
+
 from flask import jsonify
 from dateutil import parser
+
+# Get the backup folder path from environment variable
+sql_host = os.environ.get('SQL_HOST')
+if sql_host is None or not sql_host:
+    sql_host = 'localhost'
 
 
 # Connect to the MySQL database
 def dbconnect():
     return mysql.connector.connect(
-        host="localhost",
+        host=sql_host,
         user="root",
         password="password",
         database="fca")
@@ -25,9 +32,6 @@ def log_to_db(action, parameter, status):
 
 
 def get_log(start, end):
-    db = dbconnect()
-    cursor = db.cursor()
-
     start_date = None
     end_date = None
 
@@ -42,8 +46,10 @@ def get_log(start, end):
         end += " 23:59:59"
 
     if start_date is not None and end_date is not None and end_date < start_date:
-        raise ValueError
+        raise ValueError("Start Date is < End Date")
 
+    db = dbconnect()
+    cursor = db.cursor()
     try:
         select_query = "SELECT date, action, parameter, status FROM log "
 
@@ -79,7 +85,6 @@ def get_log(start, end):
 def get_stat():
     db = dbconnect()
     cursor = db.cursor()
-
     try:
         backup_count_query = "SELECT COUNT(*) FROM log WHERE action='BACKUP'"
         cursor.execute(backup_count_query)
@@ -102,3 +107,4 @@ def get_stat():
         "successful-backups": number_of_successes[0],
         "failed-backups": number_of_errors[0]
     })
+dir
