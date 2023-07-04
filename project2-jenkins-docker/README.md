@@ -5,7 +5,7 @@
   * [Reference Solution](#reference-solution)
 ---
 ## Introduction
-This project provides example of a building an application 
+This project provides an example for building an application via automation 
 
 ![](./docs/images/cicd.png)  
 <figcaption><b>Fig.1 - CICD</b></figcaption>
