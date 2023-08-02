@@ -2,7 +2,10 @@
 # Project 2 Jenkins (CI/CD), Docker, NEXUS 
 
   * [Introduction](#introduction)
-  * [Reference Solution](#reference-solution)
+
+
+  * **[Additional Notes](./docs/AdditionalNotes.md)**
+
 ---
 ## Introduction
 The purpose of this document is to outline the project 2
