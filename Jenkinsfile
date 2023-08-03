@@ -4,7 +4,7 @@ pipeline {
         stage('build') {
             steps {
                 sh "cd project1-python-flask"
-                sh "sudo docker build -t localhost:8083/pythonapp ."
+                sh "ls"
                 sh "docker image ls"
             }
             
