@@ -18,8 +18,6 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                sh "sudo docker stop localhost:8083/pythonapp"
-                sh "sudo docker rm localhost:8083/pythonapp"
                 sh "sudo docker run -d -p 5000:5000 -e SQL_HOST=host.docker.internal localhost:8083/pythonapp"
             }
         }
