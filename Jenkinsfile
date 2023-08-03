@@ -9,11 +9,6 @@ pipeline {
             }
             
         }
-        stage('push') {
-
-        }
-        stage('deploy') {
-
-        }
+        
     }
 }
