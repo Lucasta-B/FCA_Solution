@@ -23,7 +23,7 @@ pipeline {
                 sh "sudo docker run -d -p 5000:5000 -e SQL_HOST=host.docker.internal localhost:8083/pythonapp"
             }
         }
-        }
-        
     }
+        
+    
 }
